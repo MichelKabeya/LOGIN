@@ -3,9 +3,20 @@ import { StyleSheet, Text, View, TextInput, Button, Image,} from 'react-native';
 import {useState} from 'react';
 import React from 'react';
 import { Switch } from 'react-native';
-
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+const Stack = createNativeStackNavigator();
 
 export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={MainScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+function MainScreen() {
   const [Name, setName] = React.useState('');
   const [Email, setEmail] = React.useState('');
   const [Password, setPassword] = React.useState('');
@@ -13,7 +24,7 @@ export default function App() {
 
 // console.log("App starting up");
   return (
-    
+    <NavigationContainer>
       <View style={styles.background}>
         <View style={styles.menubar}>
          <Text style={styles.home}>Home</Text>
@@ -87,6 +98,7 @@ export default function App() {
 
         <StatusBar style="auto" />
       </View>
+    </NavigationContainer>
     
   );
 }
