@@ -24,7 +24,7 @@ function MainScreen() {
 
 // console.log("App starting up");
   return (
-    <NavigationContainer>
+    
       <View style={styles.background}>
         <View style={styles.menubar}>
          <Text style={styles.home}>Home</Text>
@@ -98,10 +98,10 @@ function MainScreen() {
 
         <StatusBar style="auto" />
       </View>
-    </NavigationContainer>
+   
     
   );
-}
+};
 
 const styles = StyleSheet.create({
   signup: {
