@@ -1,8 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput, Button, Image, SafeAreaView, ScrollView} from 'react-native';
-import {useState} from 'react';
 import React from 'react';
+import type { PropsWithChildren } from 'react';
 import { Switch } from 'react-native';
+import { useRef, useEffect } from 'react';
+import { Animated } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -16,6 +18,27 @@ type RootStackParamList = {
   };
 };
 
+type FadeinViewProps = PropsWithChildren<{
+  style?: object;
+}>;
+
+const FadeinView = ({ children, style }: FadeinViewProps) => {
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  useEffect(() => {
+    Animated.timing(
+      fadeAnim,
+      {toValue: 1,
+        duration: 3000,
+        useNativeDriver: false
+      }
+    ).start();
+  }, [fadeAnim]);
+  return (
+    <Animated.View style={{ ...style, opacity: fadeAnim }}>
+      {children}
+    </Animated.View>
+  );
+};
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
