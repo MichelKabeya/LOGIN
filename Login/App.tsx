@@ -5,7 +5,18 @@ import React from 'react';
 import { Switch } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-const Stack = createNativeStackNavigator();
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+
+type RootStackParamList = {
+  Home: undefined;
+  ViewDetails: {
+    NameSend: string;
+    EmailSend: string;
+    PassSend: string;
+  };
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
@@ -17,7 +28,7 @@ export default function App() {
     </NavigationContainer>
   );
 };
-function MainScreen({ navigation }) {
+function MainScreen({ navigation }: NativeStackScreenProps<RootStackParamList, 'Home'>) {
   const [Name, setName] = React.useState('');
   const [Email, setEmail] = React.useState('');
   const [Password, setPassword] = React.useState('');
@@ -101,7 +112,7 @@ function MainScreen({ navigation }) {
     </View>
   );
 };
-function ViewDetails({navigation, route}) {
+function ViewDetails({ route }: NativeStackScreenProps<RootStackParamList, 'ViewDetails'>) {
   const Nameget = route.params.NameSend;
   const Emailget = route.params.EmailSend;
   const Passget = route.params.PassSend;
