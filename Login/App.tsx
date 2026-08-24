@@ -9,6 +9,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RadioButton } from 'react-native-paper';
+import { ImageSourcePropType } from 'react-native';
 
 type RootStackParamList = {
   Home: undefined;
@@ -167,6 +168,7 @@ function ViewDetails({ route }: NativeStackScreenProps<RootStackParamList, 'View
   const Emailget = route.params.EmailSend;
   const Passget = route.params.PassSend;
   const [SelectValue, setSelectValue] = useState ('0');
+  const [ImageBlock, setImage] = useState<ImageSourcePropType | undefined>(undefined);
   return (
     <View style={styles.detailsContainer}>
       <View style={styles.detailsText}>
@@ -174,7 +176,7 @@ function ViewDetails({ route }: NativeStackScreenProps<RootStackParamList, 'View
         <Text style={styles.headings}>Email : {Emailget} </Text>
         <Text style={styles.headings}>Password : {Passget} </Text>
       </View>
-      <Text>Please select your favourite programming language:</Text>
+      <Text style={styles.headings}>Select your favourite programming language:</Text>
       <View style={styles.radio}>
         <View style={styles.radioGroup}>
           <View style={styles.radioButton}>
@@ -205,6 +207,27 @@ function ViewDetails({ route }: NativeStackScreenProps<RootStackParamList, 'View
             <Text style={styles.radioLabel}>JavaScript</Text>
           </View>
         </View>
+      </View>
+      <View style= {{flex: 1}}>
+        <Text style = {{fontWeight: 'bold', flex: 0, paddingTop: 20, paddingBottom:8, justifyContent: 'center', textAlign: 'center', alignItems: 'center'}}>
+          View your favourite programming  language:
+        </Text>
+        <Button title="Process"
+        onPress={() =>
+        { 
+          switch (SelectValue)
+          {
+            case "1": 
+            setImage(require('./_images/HTML.png'));
+            break;
+            case "2":
+              setImage(require('./_images/CSS.png'));
+            break;
+            case "3":
+              setImage(require('./_images/JAVA SCRIPT.png'))  
+          }
+        }
+        } />    
       </View>
     </View>
   );
