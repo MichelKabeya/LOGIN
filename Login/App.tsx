@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput, Button, Image, SafeAreaView, ScrollView} from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import type { PropsWithChildren } from 'react';
 import { Switch } from 'react-native';
 import { useRef, useEffect } from 'react';
@@ -51,11 +51,27 @@ export default function App() {
     </NavigationContainer>
   );
 };
+function isEmpty(value: unknown): boolean {
+  if (value == null) {
+    return true;
+  }
+
+  if (typeof value === 'string' || Array.isArray(value)) {
+    return value.length === 0;
+  }
+
+  if (typeof value === 'object') {
+    return Object.keys(value).length === 0;
+  }
+
+  return false;
+}
 function MainScreen({ navigation }: NativeStackScreenProps<RootStackParamList, 'Home'>) {
   const [Name, setName] = React.useState('');
   const [Email, setEmail] = React.useState('');
   const [Password, setPassword] = React.useState('');
   const [English, setEnglish] = React.useState(false);
+  const [Error, setError] = useState('')
 
 // console.log("App starting up"); 
   return (
@@ -68,6 +84,7 @@ function MainScreen({ navigation }: NativeStackScreenProps<RootStackParamList, '
           />
           <Text style={styles.signup}>LOGIN</Text>
           <FadeinView>
+            <Text style = {styles.error}>{Error}</Text>
           <View style={styles.inputFlex}>
             <Text style={styles.labels}>Name :</Text>
             <TextInput
@@ -105,6 +122,7 @@ function MainScreen({ navigation }: NativeStackScreenProps<RootStackParamList, '
           <Button
             title="LOGIN"
             onPress={() => {
+              if ((isEmpty(Name)== false) && (isEmpty(Email)== false) && (isEmpty(Password)== false)){
               navigation.navigate("ViewDetails", {
                 NameSend: Name,
                 EmailSend: Email,
@@ -113,6 +131,12 @@ function MainScreen({ navigation }: NativeStackScreenProps<RootStackParamList, '
               console.log(
                 "Name: " + Name + "Email : " + Email + "Password: " + Password,
               );
+              setError("")
+            }
+            else 
+            {
+              setError("Please add all the field")
+            }
             }}
             color="turquoise"
           />
