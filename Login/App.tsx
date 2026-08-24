@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, Button, Image,} from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Image, SafeAreaView, ScrollView} from 'react-native';
 import {useState} from 'react';
 import React from 'react';
 import { Switch } from 'react-native';
@@ -25,82 +25,80 @@ function MainScreen({ navigation }) {
 
 // console.log("App starting up"); 
   return (
-    
-      <View style={styles.background}>
-         
-        <Image
-          style={styles.lockimage}
-          source={require("./_images/user.png")}
-        />
-        <Text style={styles.signup}>LOGIN</Text>
-        <View style={styles.inputFlex}>
-          <Text style={styles.labels}>Name :</Text>
-          <TextInput
-            style={styles.inputs}
-            autoCorrect={false}
-            autoCapitalize="none"
-            keyboardType="default"
-            inputMode="text"
-            placeholder="Enter your name"
-            onChangeText={(newText) => setName(newText)}
+    <View style={styles.background}>
+      <SafeAreaView>
+        <ScrollView>
+          <Image
+            style={styles.lockimage}
+            source={require("./_images/user.png")}
           />
-        </View>
-        <View style={styles.inputFlex}>
-          <Text style={styles.labels}>Email :</Text>
-          <TextInput
-            style={styles.inputs}
-            autoCorrect={false}
-            autoCapitalize="none"
-            keyboardType="email-address"
-            placeholder="example@example.com"
-            onChangeText={(newText) => setEmail(newText)}
-          />
-        </View>
-        <View style={styles.inputFlex}>
-          <Text style={styles.labels}>Password :</Text>
-          <TextInput
-            style={styles.inputs}
-            secureTextEntry={true}
-            placeholder="Enter your password"
-            onChangeText={(newText) => setPassword(newText)}
-          />
-        </View>
-        <Text style={styles.forget}>
-          Forgot Password?
-        </Text>
-      
-        <Button
-          title="LOGIN"
-          onPress={() => {
-            navigation.navigate('ViewDetails', {
-              NameSend : Name,
-              EmailSend : Email,
-              PassSend : Password
-            });
-            console.log(
-              "Name: " + Name + "Email : " + Email + "Password: " + Password,
-            );
-          }}
-          color="turquoise"
-        />
+          <Text style={styles.signup}>LOGIN</Text>
+          <View style={styles.inputFlex}>
+            <Text style={styles.labels}>Name :</Text>
+            <TextInput
+              style={styles.inputs}
+              autoCorrect={false}
+              autoCapitalize="none"
+              keyboardType="default"
+              inputMode="text"
+              placeholder="Enter your name"
+              onChangeText={(newText) => setName(newText)}
+            />
+          </View>
+          <View style={styles.inputFlex}>
+            <Text style={styles.labels}>Email :</Text>
+            <TextInput
+              style={styles.inputs}
+              autoCorrect={false}
+              autoCapitalize="none"
+              keyboardType="email-address"
+              placeholder="example@example.com"
+              onChangeText={(newText) => setEmail(newText)}
+            />
+          </View>
+          <View style={styles.inputFlex}>
+            <Text style={styles.labels}>Password :</Text>
+            <TextInput
+              style={styles.inputs}
+              secureTextEntry={true}
+              placeholder="Enter your password"
+              onChangeText={(newText) => setPassword(newText)}
+            />
+          </View>
+          <Text style={styles.forget}>Forgot Password?</Text>
 
-        <View style={styles.languageToggle}>
-          <Text style={styles.headings}>Language</Text>
-          <Switch
-            trackColor={{ false: "#a4a2a434", true: "#7c907f34" }}
-            thumbColor={English ? "#2bda22" : "#f4f3f4"}
-            ios_backgroundColor="#3e3e3e"
-            onValueChange={() => setEnglish(previousState => !previousState)}
-            value={English}
+          <Button
+            title="LOGIN"
+            onPress={() => {
+              navigation.navigate("ViewDetails", {
+                NameSend: Name,
+                EmailSend: Email,
+                PassSend: Password,
+              });
+              console.log(
+                "Name: " + Name + "Email : " + Email + "Password: " + Password,
+              );
+            }}
+            color="turquoise"
           />
-        </View>
 
-       
+          <View style={styles.languageToggle}>
+            <Text style={styles.headings}>Language</Text>
+            <Switch
+              trackColor={{ false: "#a4a2a434", true: "#7c907f34" }}
+              thumbColor={English ? "#2bda22" : "#f4f3f4"}
+              ios_backgroundColor="#3e3e3e"
+              onValueChange={() =>
+                setEnglish((previousState) => !previousState)
+              }
+              value={English}
+            />
+          </View>
 
-        <StatusBar style="auto" />
-      </View>
-   
-    
+          <StatusBar style="auto" />
+        </ScrollView>
+      </SafeAreaView>
+    </View>
   );
 };
 function ViewDetails({navigation, route}) {
