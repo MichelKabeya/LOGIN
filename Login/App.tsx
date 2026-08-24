@@ -26,8 +26,8 @@ function MainScreen({ navigation }) {
 // console.log("App starting up"); 
   return (
     <View style={styles.background}>
-      <SafeAreaView>
-        <ScrollView>
+      <SafeAreaView style={styles.safeArea}>
+        <ScrollView contentContainerStyle={styles.scrollContent}>
           <Image
             style={styles.lockimage}
             source={require("./_images/user.png")}
@@ -106,7 +106,7 @@ function ViewDetails({navigation, route}) {
   const Emailget = route.params.EmailSend;
   const Passget = route.params.PassSend;
   return (
-    <View style={{ flexDirection: 'column', alignItems: 'left', gap: 10}}>
+    <View style={{ flexDirection: 'column', alignItems: 'flex-start', gap: 10}}>
       <Text style={styles.headings}>Name : {Nameget} </Text>
       <Text style={styles.headings}>Email : {Emailget} </Text>
       <Text style={styles.headings}>Password : {Passget} </Text>
@@ -128,6 +128,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#f7f0f0',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  safeArea: {
+    flex: 1,
+    width: '100%',
+  },
+  scrollContent: {
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 24,
   },
   headings: {
     color: 'black',
