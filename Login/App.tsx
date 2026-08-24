@@ -30,7 +30,7 @@ const FadeinView = ({ children, style }: FadeinViewProps) => {
     Animated.timing(
       fadeAnim,
       {toValue: 1,
-        duration: 3000,
+        duration: 2500,
         useNativeDriver: false
       }
     ).start();
@@ -73,11 +73,12 @@ function MainScreen({ navigation }: NativeStackScreenProps<RootStackParamList, '
   const [Email, setEmail] = React.useState('');
   const [Password, setPassword] = React.useState('');
   const [English, setEnglish] = React.useState(false);
+  const [isDark, setIsDark] = useState(false);
   const [Error, setError] = useState('')
 
 // console.log("App starting up"); 
   return (
-    <View style={styles.background}>
+    <View style={[styles.background, { backgroundColor: isDark ? '#121212' : '#FFFFFF'}]}>
       <SafeAreaView style={styles.safeArea}>
         <ScrollView contentContainerStyle={styles.scrollContent}>
           <Image
@@ -88,9 +89,9 @@ function MainScreen({ navigation }: NativeStackScreenProps<RootStackParamList, '
           <FadeinView>
             <Text style = {styles.error}>{Error}</Text>
           <View style={styles.inputFlex}>
-            <Text style={styles.labels}>Name :</Text>
+            <Text style={[styles.labels, { color: isDark ? '#FFFFFF' : '#121212' }]}>Name :</Text>
             <TextInput
-              style={styles.inputs}
+              style={[styles.inputs, { color: isDark ? '#FFFFFF' : '#121212', borderColor: isDark ? '#FFFFFF' : '#121212' }]}
               autoCorrect={false}
               autoCapitalize="none"
               keyboardType="default"
@@ -100,9 +101,9 @@ function MainScreen({ navigation }: NativeStackScreenProps<RootStackParamList, '
             />
           </View>
           <View style={styles.inputFlex}>
-            <Text style={styles.labels}>Email :</Text>
+            <Text style={[styles.labels, { color: isDark ? '#FFFFFF' : '#121212', borderColor: isDark ? '#FFFFFF' : '#121212' }]}>Email :</Text>
             <TextInput
-              style={styles.inputs}
+              style={[styles.inputs, { color: isDark ? '#FFFFFF' : '#121212', borderColor: isDark ? '#FFFFFF' : '#121212' }]}
               autoCorrect={false}
               autoCapitalize="none"
               keyboardType="email-address"
@@ -111,9 +112,9 @@ function MainScreen({ navigation }: NativeStackScreenProps<RootStackParamList, '
             />
           </View>
           <View style={styles.inputFlex}>
-            <Text style={styles.labels}>Password :</Text>
+            <Text style={[styles.labels, { color: isDark ? '#FFFFFF' : '#121212' }]}>Password :</Text>
             <TextInput
-              style={styles.inputs}
+              style={[styles.inputs, { color: isDark ? '#FFFFFF' : '#121212', borderColor: isDark ? '#FFFFFF' : '#121212' }]}
               secureTextEntry={true}
               placeholder="Enter your password"
               onChangeText={(newText) => setPassword(newText)}
@@ -145,15 +146,15 @@ function MainScreen({ navigation }: NativeStackScreenProps<RootStackParamList, '
           </FadeinView>
 
           <View style={styles.languageToggle}>
-            <Text style={styles.headings}>Language</Text>
+            <Text style={[styles.headings, { color: isDark ? '#FFFFFF' : '#121212' }]}>Change color</Text>
             <Switch
               trackColor={{ false: "#a4a2a434", true: "#7c907f34" }}
               thumbColor={English ? "#2bda22" : "#f4f3f4"}
               ios_backgroundColor="#3e3e3e"
-              onValueChange={() =>
-                setEnglish((previousState) => !previousState)
+              onValueChange={
+                setIsDark
               }
-              value={English}
+              value={isDark}
             />
           </View>
 
