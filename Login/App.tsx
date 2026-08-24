@@ -224,10 +224,16 @@ function ViewDetails({ route }: NativeStackScreenProps<RootStackParamList, 'View
               setImage(require('./_images/CSS.png'));
             break;
             case "3":
-              setImage(require('./_images/JAVA SCRIPT.png'))  
+              setImage(require('./_images/JAVA SCRIPT.png'));
+              break;
+            default:
+              setImage(undefined);
           }
         }
-        } />    
+        } />   
+        <View style = {styles.container}>
+          <Image source={ImageBlock} style={styles.ViewImage}></Image>  
+        </View> 
       </View>
     </View>
   );
@@ -249,6 +255,13 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  container: {
+
+  },
+  ViewImage: {
+    width: 300,
+    height: 300,
   },
   radio: {
     flex:0,
