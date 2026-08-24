@@ -67,6 +67,7 @@ function MainScreen({ navigation }: NativeStackScreenProps<RootStackParamList, '
             source={require("./_images/user.png")}
           />
           <Text style={styles.signup}>LOGIN</Text>
+          <FadeinView>
           <View style={styles.inputFlex}>
             <Text style={styles.labels}>Name :</Text>
             <TextInput
@@ -115,6 +116,7 @@ function MainScreen({ navigation }: NativeStackScreenProps<RootStackParamList, '
             }}
             color="turquoise"
           />
+          </FadeinView>
 
           <View style={styles.languageToggle}>
             <Text style={styles.headings}>Language</Text>
