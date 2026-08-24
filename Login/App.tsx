@@ -12,26 +12,22 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={MainScreen} />
+        <Stack.Screen name="ViewDetails" component={ViewDetails} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
-function MainScreen() {
+function MainScreen({ navigation }) {
   const [Name, setName] = React.useState('');
   const [Email, setEmail] = React.useState('');
   const [Password, setPassword] = React.useState('');
   const [English, setEnglish] = React.useState(false);
 
-// console.log("App starting up");
+// console.log("App starting up"); 
   return (
     
       <View style={styles.background}>
-        <View style={styles.menubar}>
-         <Text style={styles.home}>Home</Text>
-         <Image 
-         style={styles.menu}
-         source={require("./_images/menu.png")}/>
-        </View>
+         
         <Image
           style={styles.lockimage}
           source={require("./_images/user.png")}
@@ -76,6 +72,11 @@ function MainScreen() {
         <Button
           title="LOGIN"
           onPress={() => {
+            navigation.navigate('ViewDetails', {
+              NameSend : Name,
+              EmailSend : Email,
+              PassSend : Password
+            });
             console.log(
               "Name: " + Name + "Email : " + Email + "Password: " + Password,
             );
@@ -86,8 +87,8 @@ function MainScreen() {
         <View style={styles.languageToggle}>
           <Text style={styles.headings}>Language</Text>
           <Switch
-            trackColor={{ false: "#a4a2a434", true: "#a4a2a434" }}
-            thumbColor={English ? "#4eb3ce" : "#f4f3f4"}
+            trackColor={{ false: "#a4a2a434", true: "#7c907f34" }}
+            thumbColor={English ? "#2bda22" : "#f4f3f4"}
             ios_backgroundColor="#3e3e3e"
             onValueChange={() => setEnglish(previousState => !previousState)}
             value={English}
@@ -102,6 +103,18 @@ function MainScreen() {
     
   );
 };
+function ViewDetails({navigation, route}) {
+  const Nameget = route.params.NameSend;
+  const Emailget = route.params.EmailSend;
+  const Passget = route.params.PassSend;
+  return (
+    <View style={{ flexDirection: 'column', alignItems: 'left', gap: 10}}>
+      <Text style={styles.headings}>Name : {Nameget} </Text>
+      <Text style={styles.headings}>Email : {Emailget} </Text>
+      <Text style={styles.headings}>Password : {Passget} </Text>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   signup: {
@@ -111,15 +124,6 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     textAlign: 'center',
-  },
-  menu: {
-    width: 30,
-    height: 30,
-  },
-  home: {
-    fontSize: 25,
-    fontWeight: 'bold',
-    width: '90%',
   },
   background: {
     flex: 1,
