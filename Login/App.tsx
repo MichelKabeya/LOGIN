@@ -159,6 +159,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
+  error: {
+    color: 'red',
+    fontWeight: 'bold',
+    fontSize: 25,
+    textAlign: 'center'
+  },
   background: {
     flex: 1,
     backgroundColor: '#f7f0f0',
