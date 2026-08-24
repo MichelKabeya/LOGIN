@@ -166,7 +166,7 @@ function ViewDetails({ route }: NativeStackScreenProps<RootStackParamList, 'View
   const Nameget = route.params.NameSend;
   const Emailget = route.params.EmailSend;
   const Passget = route.params.PassSend;
-  const [SelectValue, setSelectValue] = useState ('0')
+  const [SelectValue, setSelectValue] = useState ('0');
   return (
     <View style={styles.detailsContainer}>
       <View style={styles.detailsText}>
@@ -213,7 +213,7 @@ function ViewDetails({ route }: NativeStackScreenProps<RootStackParamList, 'View
 const styles = StyleSheet.create({
   detailsContainer: {
     flex: 1,
-    padding: 24,
+    padding: 30,
     gap: 20,
   },
   detailsText: {
@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
   },
   radio: {
     flex:0,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#F5f5f5',
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -240,8 +240,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderRadius: 8,
     backgroundColor: 'white',
-    padding: 16,
-    elevation: 4,
+    padding: 15,
+    elevation: 8,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
