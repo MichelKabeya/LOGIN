@@ -274,11 +274,17 @@ function ViewDetails({
   const Emailget = route.params.EmailSend;
   const Passget = route.params.PassSend;
   const [SelectValue, setSelectValue] = useState("0");
-  const [Blockarray] = useState ([" ", " ", " ", " "]);
-  const [Iselect, setIselect] = useState(0)
-  const [ImageBlock, setImage] = useState<ImageSourcePropType | undefined>(
+  const [Blockarray] = useState<ImageSourcePropType[]>([
     undefined,
-  );
+  require('./_images/HTML.png'),
+  require('./_images/CSS.png'),
+  require('./_images/JAVA SCRIPT.png'),
+  ]);
+  
+  const [Iselect, setIselect] = useState(0)
+  // const [ImageBlock, setImage] = useState<ImageSourcePropType | undefined>(
+  //   undefined,
+  // );
   return (
     <View style={styles.detailsContainer}>
       <View style={styles.detailsText}>
@@ -355,7 +361,7 @@ function ViewDetails({
           }}
         />
         <View style={styles.container}>
-          <Image source={ImageBlock} style={styles.ViewImage}></Image>
+          <Image source={Blockarray[Iselect]} style={styles.ViewImage}></Image>
         </View>
       </View>
     </View>
