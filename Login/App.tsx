@@ -274,6 +274,7 @@ function ViewDetails({
   const Emailget = route.params.EmailSend;
   const Passget = route.params.PassSend;
   const [SelectValue, setSelectValue] = useState("0");
+  const [Blockarray] = useState ([" ", " ", " "]);
   const [ImageBlock, setImage] = useState<ImageSourcePropType | undefined>(
     undefined,
   );
