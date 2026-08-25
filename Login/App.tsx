@@ -26,6 +26,7 @@ type RootStackParamList = {
     NameSend: string;
     EmailSend: string;
     PassSend: string;
+    GenreSend: string;
   };
 };
 
@@ -38,7 +39,7 @@ const FadeinView = ({ children, style }: FadeinViewProps) => {
   useEffect(() => {
     Animated.timing(fadeAnim, {
       toValue: 1,
-      duration: 2500,
+      duration: 1000,
       useNativeDriver: false,
     }).start();
   }, [fadeAnim]);
@@ -178,44 +179,49 @@ function MainScreen({
               />
             </View>
             <Text style={styles.forget}>Forgot Password?</Text>
-            <Text style={styles.headings}>
-              Genre:
-            </Text>
-      
-        <View style={styles.radioGroupGenre}>
-          <View style={styles.radioButton}>
-            <RadioButton.Android
-              value="1"
-              status={SelectRole === "1" ? "checked" : "unchecked"}
-              onPress={() => setSelectRole("1")}
-              color="#007BFF"
-            />
-            <Text style={styles.radioLabel}>Male</Text>
-          </View>
-          <View style={styles.radioButton}>
-            <RadioButton.Android
-              value="2"
-              status={SelectRole === "2" ? "checked" : "unchecked"}
-              onPress={() => setSelectRole("2")}
-              color="#007BFF"
-            />
-            <Text style={styles.radioLabel}>Female</Text>
-          </View>
-          <View style={styles.radioButton}>
-            <RadioButton.Android
-              value="3"
-              status={SelectRole === "3" ? "checked" : "unchecked"}
-              onPress={() => setSelectRole("3")}
-              color="#000101"
-            />
-            <Text style={styles.radioLabel}>Unknown</Text>
-          </View>
-          </View>
-        
+            <Text style={styles.headings}>Genre:</Text>
+
+            <View style={styles.radioGroupGenre}>
+              <View style={styles.radioButton}>
+                <RadioButton.Android
+                  value="1"
+                  status={SelectRole === "1" ? "checked" : "unchecked"}
+                  onPress={() => setSelectRole("1")}
+                  color="#007BFF"
+                />
+                <Text style={styles.radioLabel}>Male</Text>
+              </View>
+              <View style={styles.radioButton}>
+                <RadioButton.Android
+                  value="2"
+                  status={SelectRole === "2" ? "checked" : "unchecked"}
+                  onPress={() => setSelectRole("2")}
+                  color="#007BFF"
+                />
+                <Text style={styles.radioLabel}>Female</Text>
+              </View>
+              <View style={styles.radioButton}>
+                <RadioButton.Android
+                  value="3"
+                  status={SelectRole === "3" ? "checked" : "unchecked"}
+                  onPress={() => setSelectRole("3")}
+                  color="#000101"
+                />
+                <Text style={styles.radioLabel}>Unknown</Text>
+              </View>
+            </View>
 
             <Button
               title="LOGIN"
               onPress={() => {
+                const selectedGenre =
+                  SelectRole === "1"
+                    ? "Male"
+                    : SelectRole === "2"
+                      ? "Female"
+                      : SelectRole === "3"
+                        ? "Unknown"
+                        : "";
                 if (
                   isEmpty(Name) == false &&
                   isEmpty(Email) == false &&
@@ -225,15 +231,16 @@ function MainScreen({
                     NameSend: Name,
                     EmailSend: Email,
                     PassSend: Password,
+                    GenreSend: selectedGenre,
                   });
-                  console.log(
-                    "Name: " +
-                      Name +
-                      "Email : " +
-                      Email +
-                      "Password: " +
-                      Password,
-                  );
+                  // console.log(
+                  //   "Name: " +
+                  //     Name +
+                  //     "Email : " +
+                  //     Email +
+                  //     "Password: " +
+                  //     Password,
+                  // );
                   setError("");
                 } else {
                   setError("Please add all the field");
@@ -260,7 +267,7 @@ function MainScreen({
               value={isDark}
             />
           </View>
-        
+
           <StatusBar style="auto" />
         </ScrollView>
       </SafeAreaView>
@@ -273,6 +280,7 @@ function ViewDetails({
   const Nameget = route.params.NameSend;
   const Emailget = route.params.EmailSend;
   const Passget = route.params.PassSend;
+  const Genreget = route.params.GenreSend;
   const [SelectValue, setSelectValue] = useState("0");
   const [Blockarray] = useState<ImageSourcePropType[]>([
     undefined,
@@ -286,12 +294,13 @@ function ViewDetails({
   //   undefined,
   // );
   return (
+    <ScrollView>
     <View style={styles.detailsContainer}>
       <View style={styles.detailsText}>
         <Text style={styles.headings}>Name : {Nameget} </Text>
         <Text style={styles.headings}>Email : {Emailget} </Text>
         <Text style={styles.headings}>Password : {Passget} </Text>
-        <Text style={styles.headings}>Genre : </Text>
+        <Text style={styles.headings}>Genre : {Genreget} </Text>
       </View>
       <Text style={styles.headings}>
         Select your favourite programming language:
@@ -365,6 +374,7 @@ function ViewDetails({
         </View>
       </View>
     </View>
+    </ScrollView>
   );
 }
 
