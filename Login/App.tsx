@@ -274,7 +274,8 @@ function ViewDetails({
   const Emailget = route.params.EmailSend;
   const Passget = route.params.PassSend;
   const [SelectValue, setSelectValue] = useState("0");
-  const [Blockarray] = useState ([" ", " ", " "]);
+  const [Blockarray] = useState ([" ", " ", " ", " "]);
+  const [Iselect, setIselect] = useState(0)
   const [ImageBlock, setImage] = useState<ImageSourcePropType | undefined>(
     undefined,
   );
@@ -337,19 +338,20 @@ function ViewDetails({
         <Button
           title="Process"
           onPress={() => {
-            switch (SelectValue) {
-              case "1":
-                setImage(require("./_images/HTML.png"));
-                break;
-              case "2":
-                setImage(require("./_images/CSS.png"));
-                break;
-              case "3":
-                setImage(require("./_images/JAVA SCRIPT.png"));
-                break;
-              default:
-                setImage(undefined);
-            }
+            setIselect(Number(SelectValue));
+            // switch (SelectValue) {
+            //   case "1":
+            //     setImage(require("./_images/HTML.png"));
+            //     break;
+            //   case "2":
+            //     setImage(require("./_images/CSS.png"));
+            //     break;
+            //   case "3":
+            //     setImage(require("./_images/JAVA SCRIPT.png"));
+            //     break;
+            //   default:
+            //     setImage(undefined);
+            // }
           }}
         />
         <View style={styles.container}>
