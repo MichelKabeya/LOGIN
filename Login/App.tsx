@@ -277,8 +277,15 @@ function MainScreen({
     </View>
   );
 }
+
+
+
+
+
+
 function ViewDetails({
   route,
+  navigation,
 }: NativeStackScreenProps<RootStackParamList, "ViewDetails">) {
   const Nameget = route.params.NameSend;
   const Emailget = route.params.EmailSend;
@@ -375,20 +382,37 @@ function ViewDetails({
         <View style={styles.container}>
           <Image source={Blockarray[Iselect]} style={styles.ViewImage}></Image>
         </View>
+        <Button title="List skills" onPress={() => navigation.navigate("ListSkills")} />
       </View>
     </View>
     </ScrollView>
   );
 }
+
+
+
+
+
+
+
 function ListSkills ({
 }:NativeStackScreenProps<RootStackParamList, "ListSkills">){
+  const [txtSkill, setSkill] = useState ('');
+  const [Skill] = useState<string[]>([]);
 return(
   <View style={styles.appContainer}>
     <ScrollView>
-    <Text style={styles.headings}>List of Skills</Text>
-    <Text style={styles.headings}>1. HTML</Text>
-    <Text style={styles.headings}>2. CSS</Text>
-    <Text style={styles.headings}>3. JavaScript</Text>
+     <View style={styles.Mainpicture}>
+      <Image style={styles.BannerImage} source={require("./_images/Skill_banner.png")} />
+      </View>
+      <Text style={styles.headings}>List your Skills</Text>
+      <View style={styles.inputContainer}>
+        <TextInput style={styles.input} placeholder="Enter your skill" onChangeText={setSkill} value={txtSkill} />
+          <Button title='Add Skill' onPress={()=>{
+            Skill.push(txtSkill);
+            setSkill("")
+          }} />
+      </View>
     </ScrollView>
   </View>
 )
@@ -398,11 +422,37 @@ return(
 
 
 const styles = StyleSheet.create({
+  detailsContainer: {
+     padding: 15
+  },
   appContainer: {
     flex: 1,
     padding: 50,
     paddingHorizontal: 16,
   },
+  Mainpicture: { },
+  input: {
+    borderWidth: 1,
+    borderColor: '#cccccc',
+    width: '70%',
+    margin: 8,
+    padding: 8,
+  },
+
+  inputContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent:'space-between',
+    alignItems: 'center',
+    marginBottom: 24,
+    borderBottomWidth: 1,
+    borderBottomColor: '#cccccc'
+  },
+  BannerImage: { 
+    height: 350,
+    alignContent: "center",
+  },
+
   detailsText: {
     gap: 10,
   },
