@@ -22,7 +22,8 @@ import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RadioButton } from "react-native-paper";
 import { ImageSourcePropType } from "react-native";
 
-type RootStackParamList = {
+// My tab navigator has these routes, and here's what each route expects as parameters
+type TabParamList = {
   Home: undefined;
   ViewDetails: {
     NameSend: string;
@@ -32,6 +33,12 @@ type RootStackParamList = {
   };
   ListSkills: undefined
 };
+// create a navigation system that can display several screens as tabs
+const tab = createMaterialTopTabNavigator<TabParamList>();
+
+type MainScreenProps = MaterialTopTabScreenProps<TabParamList, 'Home'>;
+type ViewDetailsProps = MaterialTopTabScreenProps<TabParamList, 'ViewDetails'>;
+type ListSkillsProps = MaterialTopTabScreenProps<TabParamList, 'ListSkills'>;
 
 type FadeinViewProps = PropsWithChildren<{
   style?: object;
@@ -52,16 +59,16 @@ const FadeinView = ({ children, style }: FadeinViewProps) => {
     </Animated.View>
   );
 };
-const Stack = createNativeStackNavigator<RootStackParamList>();
+
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={MainScreen} />
-        <Stack.Screen name="ViewDetails" component={ViewDetails} />
-        <Stack.Screen name="ListSkills" component={ListSkills} />
-      </Stack.Navigator>
+      <tab.Navigator>
+        <tab.Screen name="Home" component={MainScreen} />
+        <tab.Screen name="ViewDetails" component={ViewDetails} />
+        <tab.Screen name="ListSkills" component={ListSkills} />
+      </tab.Navigator>
     </NavigationContainer>
   );
 }
@@ -83,7 +90,7 @@ function isEmpty(value: unknown): boolean {
 }
 function MainScreen({
   navigation,
-}: NativeStackScreenProps<RootStackParamList, "Home">) {
+}: NativeStackScreenProps<TabParamList, "Home">) {
   const [Name, setName] = React.useState("");
   const [Email, setEmail] = React.useState("");
   const [Password, setPassword] = React.useState("");
@@ -288,7 +295,7 @@ function MainScreen({
 function ViewDetails({
   route,
   navigation,
-}: NativeStackScreenProps<RootStackParamList, "ViewDetails">) {
+}: NativeStackScreenProps<TabParamList, "ViewDetails">) {
   const Nameget = route.params.NameSend;
   const Emailget = route.params.EmailSend;
   const Passget = route.params.PassSend;
@@ -398,7 +405,7 @@ function ViewDetails({
 
 
 function ListSkills ({
-}:NativeStackScreenProps<RootStackParamList, "ListSkills">){
+}:NativeStackScreenProps<TabParamList, "ListSkills">){
   const [txtSkill, setSkill] = useState ('');
   const [Skill] = useState<string[]>([]);
   const renderSkills =() => {
