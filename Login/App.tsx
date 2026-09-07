@@ -296,10 +296,10 @@ function ViewDetails({
   route,
   navigation,
 }: NativeStackScreenProps<TabParamList, "ViewDetails">) {
-  const Nameget = route.params.NameSend;
-  const Emailget = route.params.EmailSend;
-  const Passget = route.params.PassSend;
-  const Genreget = route.params.GenreSend;
+  const Nameget = route.params?.NameSend;
+  const Emailget = route.params?.EmailSend;
+  const Passget = route.params?.PassSend;
+  const Genreget = route.params?.GenreSend;
   const [SelectValue, setSelectValue] = useState("0");
   const [Blockarray] = useState<ImageSourcePropType[]>([
     undefined,
