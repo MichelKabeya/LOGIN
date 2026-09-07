@@ -408,7 +408,10 @@ function ListSkills({}: NativeStackScreenProps<TabParamList, "ListSkills">) {
         <View key={i} style={styles.inputContainer}>
           <Text  style={styles.SkillText}>
             {Skill[i]}
-          </Text>,
+          </Text>
+          <TouchableOpacity onPress={() => removeSkillHandler(i)} style={styles.deleteBtn}>
+            <Text style={styles.deleteBtnText}>Remove</Text>
+          </TouchableOpacity>
         </View>
       );
     }
