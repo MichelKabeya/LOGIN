@@ -405,9 +405,11 @@ function ListSkills({}: NativeStackScreenProps<TabParamList, "ListSkills">) {
     const arrOutput = [];
     for (let i = 0; i < Skill.length; i++) {
       arrOutput.push(
-        <Text key={i} style={styles.SkillText}>
-          {Skill[i]}
-        </Text>,
+        <View key={i} style={styles.inputContainer}>
+          <Text  style={styles.SkillText}>
+            {Skill[i]}
+          </Text>,
+        </View>
       );
     }
     return arrOutput;
