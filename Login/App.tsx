@@ -8,6 +8,7 @@ import {
   Image,
   SafeAreaView,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { MaterialTopTabScreenProps } from "@react-navigation/material-top-tabs";
@@ -31,14 +32,11 @@ type TabParamList = {
     PassSend: string;
     GenreSend: string;
   };
-  ListSkills: undefined
+  ListSkills: undefined;
 };
+
 // create a navigation system that can display several screens as tabs
 const tab = createMaterialTopTabNavigator<TabParamList>();
-
-type MainScreenProps = MaterialTopTabScreenProps<TabParamList, 'Home'>;
-type ViewDetailsProps = MaterialTopTabScreenProps<TabParamList, 'ViewDetails'>;
-type ListSkillsProps = MaterialTopTabScreenProps<TabParamList, 'ListSkills'>;
 
 type FadeinViewProps = PropsWithChildren<{
   style?: object;
@@ -60,11 +58,10 @@ const FadeinView = ({ children, style }: FadeinViewProps) => {
   );
 };
 
-
 export default function App() {
   return (
     <NavigationContainer>
-      <tab.Navigator>
+      <tab.Navigator screenOptions={{ tabBarStyle: { marginTop: 30 } }}>
         <tab.Screen name="Home" component={MainScreen} />
         <tab.Screen name="ViewDetails" component={ViewDetails} />
         <tab.Screen name="ListSkills" component={ListSkills} />
@@ -80,7 +77,6 @@ function isEmpty(value: unknown): boolean {
   if (typeof value === "string" || Array.isArray(value)) {
     return value.length === 0;
   }
-
 
   if (typeof value === "object") {
     return Object.keys(value).length === 0;
@@ -287,11 +283,6 @@ function MainScreen({
   );
 }
 
-
-
-
-
-
 function ViewDetails({
   route,
   navigation,
@@ -303,160 +294,165 @@ function ViewDetails({
   const [SelectValue, setSelectValue] = useState("0");
   const [Blockarray] = useState<ImageSourcePropType[]>([
     undefined,
-  require('./_images/HTML.png'),
-  require('./_images/CSS.png'),
-  require('./_images/JAVA SCRIPT.png'),
+    require("./_images/HTML.png"),
+    require("./_images/CSS.png"),
+    require("./_images/JAVA SCRIPT.png"),
   ]);
-  
-  const [Iselect, setIselect] = useState(0)
+
+  const [Iselect, setIselect] = useState(0);
   // const [ImageBlock, setImage] = useState<ImageSourcePropType | undefined>(
   //   undefined,
   // );
   return (
     <ScrollView>
-    <View style={styles.detailsContainer}>
-      <View style={styles.detailsText}>
-        <Text style={styles.headings}>Name : {Nameget} </Text>
-        <Text style={styles.headings}>Email : {Emailget} </Text>
-        <Text style={styles.headings}>Password : {Passget} </Text>
-        <Text style={styles.headings}>Genre : {Genreget} </Text>
-      </View>
-      <Text style={styles.headings}>
-        Select your favourite programming language:
-      </Text>
-      <View style={styles.radio}>
-        <View style={styles.radioGroup}>
-          <View style={styles.radioButton}>
-            <RadioButton.Android
-              value="1"
-              status={SelectValue === "1" ? "checked" : "unchecked"}
-              onPress={() => setSelectValue("1")}
-              color="#007BFF"
-            />
-            <Text style={styles.radioLabel}>HTML</Text>
-          </View>
-          <View style={styles.radioButton}>
-            <RadioButton.Android
-              value="2"
-              status={SelectValue === "2" ? "checked" : "unchecked"}
-              onPress={() => setSelectValue("2")}
-              color="#007BFF"
-            />
-            <Text style={styles.radioLabel}>CSS</Text>
-          </View>
-          <View style={styles.radioButton}>
-            <RadioButton.Android
-              value="3"
-              status={SelectValue === "3" ? "checked" : "unchecked"}
-              onPress={() => setSelectValue("3")}
-              color="#000101"
-            />
-            <Text style={styles.radioLabel}>JavaScript</Text>
-          </View>
+      <View style={styles.detailsContainer}>
+        <View style={styles.detailsText}>
+          <Text style={styles.headings}>Name : {Nameget} </Text>
+          <Text style={styles.headings}>Email : {Emailget} </Text>
+          <Text style={styles.headings}>Password : {Passget} </Text>
+          <Text style={styles.headings}>Genre : {Genreget} </Text>
         </View>
-      </View>
-      <View style={{ flex: 1 }}>
-        <Text
-          style={{
-            fontWeight: "bold",
-            flex: 0,
-            paddingTop: 20,
-            paddingBottom: 8,
-            justifyContent: "center",
-            textAlign: "center",
-            alignItems: "center",
-          }}
-        >
-          View your favourite programming language:
+        <Text style={styles.headings}>
+          Select your favourite programming language:
         </Text>
-        <Button
-          title="Process"
-          onPress={() => {
-            setIselect(Number(SelectValue));
-            // switch (SelectValue) {
-            //   case "1":
-            //     setImage(require("./_images/HTML.png"));
-            //     break;
-            //   case "2":
-            //     setImage(require("./_images/CSS.png"));
-            //     break;
-            //   case "3":
-            //     setImage(require("./_images/JAVA SCRIPT.png"));
-            //     break;
-            //   default:
-            //     setImage(undefined);
-            // }
-          }}
-        />
-        <View style={styles.container}>
-          <Image source={Blockarray[Iselect]} style={styles.ViewImage}></Image>
+        <View style={styles.radio}>
+          <View style={styles.radioGroup}>
+            <View style={styles.radioButton}>
+              <RadioButton.Android
+                value="1"
+                status={SelectValue === "1" ? "checked" : "unchecked"}
+                onPress={() => setSelectValue("1")}
+                color="#007BFF"
+              />
+              <Text style={styles.radioLabel}>HTML</Text>
+            </View>
+            <View style={styles.radioButton}>
+              <RadioButton.Android
+                value="2"
+                status={SelectValue === "2" ? "checked" : "unchecked"}
+                onPress={() => setSelectValue("2")}
+                color="#007BFF"
+              />
+              <Text style={styles.radioLabel}>CSS</Text>
+            </View>
+            <View style={styles.radioButton}>
+              <RadioButton.Android
+                value="3"
+                status={SelectValue === "3" ? "checked" : "unchecked"}
+                onPress={() => setSelectValue("3")}
+                color="#000101"
+              />
+              <Text style={styles.radioLabel}>JavaScript</Text>
+            </View>
+          </View>
         </View>
-        <Button title="List skills"  onPress={() => navigation.navigate("ListSkills")} />
+        <View style={{ flex: 1 }}>
+          <Text
+            style={{
+              fontWeight: "bold",
+              flex: 0,
+              paddingTop: 20,
+              paddingBottom: 8,
+              justifyContent: "center",
+              textAlign: "center",
+              alignItems: "center",
+            }}
+          >
+            View your favourite programming language:
+          </Text>
+          <Button
+            title="Process"
+            onPress={() => {
+              setIselect(Number(SelectValue));
+              // switch (SelectValue) {
+              //   case "1":
+              //     setImage(require("./_images/HTML.png"));
+              //     break;
+              //   case "2":
+              //     setImage(require("./_images/CSS.png"));
+              //     break;
+              //   case "3":
+              //     setImage(require("./_images/JAVA SCRIPT.png"));
+              //     break;
+              //   default:
+              //     setImage(undefined);
+              // }
+            }}
+          />
+          <View style={styles.container}>
+            <Image
+              source={Blockarray[Iselect]}
+              style={styles.ViewImage}
+            ></Image>
+          </View>
+          <Button
+            title="List skills"
+            onPress={() => navigation.navigate("ListSkills")}
+          />
+        </View>
       </View>
-    </View>
     </ScrollView>
   );
 }
 
-
-
-
-
-
-
-function ListSkills ({
-}:NativeStackScreenProps<TabParamList, "ListSkills">){
-  const [txtSkill, setSkill] = useState ('');
-  const [Skill] = useState<string[]>([]);
-  const renderSkills =() => {
+function ListSkills({}: NativeStackScreenProps<TabParamList, "ListSkills">) {
+  const [txtSkill, setSkill] = useState("");
+  const [Skill, setSkills] = useState<string[]>([]);
+  const removeSkillHandler = (index: number) => {
+    setSkills((currentSkills) => currentSkills.filter((skill, i) => i !== index));
+  }
+  const renderSkills = () => {
     const arrOutput = [];
     for (let i = 0; i < Skill.length; i++) {
       arrOutput.push(
-      <Text key={i} style={styles.SkillText}>
-        {Skill[i]}
-        </Text>
+        <Text key={i} style={styles.SkillText}>
+          {Skill[i]}
+        </Text>,
       );
     }
-    return arrOutput
-  }
-return(
-
-
-  <View style={styles.appContainer}>
-    <ScrollView>
-     <View style={styles.Mainpicture}>
-      <Image style={styles.BannerImage} source={require("./_images/Skill_banner.png")} />
-      </View>
-      <Text style={styles.headings}>List your Skills</Text>
-      <View style={styles.inputContainer}>
-        <TextInput style={styles.input} placeholder="Enter your skill" onChangeText={setSkill} value={txtSkill} />
-          <Button title='Add Skill' 
-          onPress={()=>{
-            Skill.push(txtSkill);
-            setSkill("");
-            console.log(Skill.toString()); 
-          }} />
-      </View>
-      <View style={styles.skillContainer}>
-        {renderSkills()}
-      </View>
-    </ScrollView>
-  </View>
-)
+    return arrOutput;
+  };
+  return (
+    <View style={styles.appContainer}>
+      <ScrollView>
+        <View style={styles.Mainpicture}>
+          <Image
+            style={styles.BannerImage}
+            source={require("./_images/Skill_banner.png")}
+          />
+        </View>
+        <Text style={styles.headings}>List your Skills</Text>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your skill"
+            onChangeText={setSkill}
+            value={txtSkill}
+          />
+          <Button
+            title="Add Skill"
+            onPress={() => {
+              Skill.push(txtSkill);
+              setSkill("");
+              console.log(Skill.toString());
+            }}
+          />
+        </View>
+        <View style={styles.skillContainer}>{renderSkills()}</View>
+      </ScrollView>
+    </View>
+  );
 }
-
-  
-
 
 const styles = StyleSheet.create({
   detailsContainer: {
-     padding: 15,
-     marginBottom: 50,
+    padding: 15,
+    marginBottom: 50,
   },
   SkillText: {
     fontSize: 15,
     marginVertical: 5,
-    borderBottomColor: '#000000',
+    borderBottomColor: "#000000",
     borderBottomWidth: 0.5,
   },
   skillContainer: {
@@ -467,25 +463,25 @@ const styles = StyleSheet.create({
     padding: 50,
     paddingHorizontal: 16,
   },
-  Mainpicture: { },
+  Mainpicture: {},
   input: {
     borderWidth: 1,
-    borderColor: '#cccccc',
-    width: '70%',
+    borderColor: "#cccccc",
+    width: "70%",
     margin: 8,
     padding: 8,
   },
 
   inputContainer: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent:'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: 24,
     borderBottomWidth: 1,
-    borderBottomColor: '#cccccc'
+    borderBottomColor: "#cccccc",
   },
-  BannerImage: { 
+  BannerImage: {
     height: 350,
     alignContent: "center",
   },
@@ -513,7 +509,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   radioGroupGenre: {
-     flexDirection: "row",
+    flexDirection: "row",
     alignContent: "center",
     justifyContent: "space-around",
     marginTop: 5,
@@ -621,5 +617,14 @@ const styles = StyleSheet.create({
     marginTop: 20,
     justifyContent: "space-between",
     width: "60%", // Adjust width as needed
+  },
+  deleteBtn: {
+    backgroundColor: '#e15656',
+    padding: 5,
+    borderRadius: 5
+  },
+  deleteBtnText: {
+    color: 'white',
+    fontWeight: 'bold',
   },
 });
