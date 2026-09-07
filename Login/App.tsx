@@ -421,10 +421,15 @@ return(
       <Text style={styles.headings}>List your Skills</Text>
       <View style={styles.inputContainer}>
         <TextInput style={styles.input} placeholder="Enter your skill" onChangeText={setSkill} value={txtSkill} />
-          <Button title='Add Skill' onPress={()=>{
+          <Button title='Add Skill' 
+          onPress={()=>{
             Skill.push(txtSkill);
-            setSkill("")
+            setSkill("");
+            console.log(Skill.toString()); 
           }} />
+      </View>
+      <View style={styles.skillContainer}>
+        {renderSkills()}
       </View>
     </ScrollView>
   </View>
@@ -444,6 +449,9 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     borderBottomColor: '#000000',
     borderBottomWidth: 0.5,
+  },
+  skillContainer: {
+
   },
   appContainer: {
     flex: 1,
