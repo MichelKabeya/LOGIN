@@ -382,7 +382,7 @@ function ViewDetails({
         <View style={styles.container}>
           <Image source={Blockarray[Iselect]} style={styles.ViewImage}></Image>
         </View>
-        <Button title="List skills" onPress={() => navigation.navigate("ListSkills")} />
+        <Button title="List skills"  onPress={() => navigation.navigate("ListSkills")} />
       </View>
     </View>
     </ScrollView>
@@ -399,7 +399,20 @@ function ListSkills ({
 }:NativeStackScreenProps<RootStackParamList, "ListSkills">){
   const [txtSkill, setSkill] = useState ('');
   const [Skill] = useState<string[]>([]);
+  const renderSkills =() => {
+    const arrOutput = [];
+    for (let i = 0; i < Skill.length; i++) {
+      arrOutput.push(
+      <Text key={i} style={styles.SkillText}>
+        {Skill[i]}
+        </Text>
+      );
+    }
+    return arrOutput
+  }
 return(
+
+
   <View style={styles.appContainer}>
     <ScrollView>
      <View style={styles.Mainpicture}>
@@ -423,7 +436,14 @@ return(
 
 const styles = StyleSheet.create({
   detailsContainer: {
-     padding: 15
+     padding: 15,
+     marginBottom: 50,
+  },
+  SkillText: {
+    fontSize: 15,
+    marginVertical: 5,
+    borderBottomColor: '#000000',
+    borderBottomWidth: 0.5,
   },
   appContainer: {
     flex: 1,
