@@ -451,7 +451,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
   },
   skillContainer: {
-
+    flex: 5,
   },
   appContainer: {
     flex: 1,
