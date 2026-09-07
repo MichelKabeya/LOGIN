@@ -9,6 +9,8 @@ import {
   SafeAreaView,
   ScrollView,
 } from "react-native";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { MaterialTopTabScreenProps } from "@react-navigation/material-top-tabs";
 import React, { useState } from "react";
 import type { PropsWithChildren } from "react";
 import { Switch } from "react-native";
