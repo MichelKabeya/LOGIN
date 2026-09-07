@@ -28,6 +28,7 @@ type RootStackParamList = {
     PassSend: string;
     GenreSend: string;
   };
+  ListSkills: undefined
 };
 
 type FadeinViewProps = PropsWithChildren<{
@@ -57,6 +58,7 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name="Home" component={MainScreen} />
         <Stack.Screen name="ViewDetails" component={ViewDetails} />
+        <Stack.Screen name="ListSkills" component={ListSkills} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -69,6 +71,7 @@ function isEmpty(value: unknown): boolean {
   if (typeof value === "string" || Array.isArray(value)) {
     return value.length === 0;
   }
+
 
   if (typeof value === "object") {
     return Object.keys(value).length === 0;
@@ -377,12 +380,28 @@ function ViewDetails({
     </ScrollView>
   );
 }
+function ListSkills ({
+}:NativeStackScreenProps<RootStackParamList, "ListSkills">){
+return(
+  <View style={styles.appContainer}>
+    <ScrollView>
+    <Text style={styles.headings}>List of Skills</Text>
+    <Text style={styles.headings}>1. HTML</Text>
+    <Text style={styles.headings}>2. CSS</Text>
+    <Text style={styles.headings}>3. JavaScript</Text>
+    </ScrollView>
+  </View>
+)
+}
+
+  
+
 
 const styles = StyleSheet.create({
-  detailsContainer: {
+  appContainer: {
     flex: 1,
-    padding: 30,
-    gap: 20,
+    padding: 50,
+    paddingHorizontal: 16,
   },
   detailsText: {
     gap: 10,
