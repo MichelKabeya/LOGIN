@@ -10,9 +10,9 @@ import {
   TextInput,
   Button,
   Image,
-  SafeAreaView,
   ScrollView,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import FadeinView from "../_component/animation"
 import React, { useState } from "react";
 import {styles} from "../_component/style"

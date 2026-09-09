@@ -6,7 +6,6 @@ import {
   View,
   Button,
   Image,
-  SafeAreaView,
   ScrollView,
 } from "react-native";
 import { useState } from "react";
